@@ -1,22 +1,48 @@
-<!-- templates/index.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Flask App</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flask Chat App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <h1>Welcome to Your Flask App!</h1>
-  <form action="/" method="post">
-    <input type="text" name="message" placeholder="Enter message">
-    <button type="submit">Submit</button>
-  </form>
-  {% if messages %}
-    <h2>Messages:</h2>
-    <ul>
-    {% for msg in messages %}
-      <li>{{ msg[1] }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
+<body class="bg-gray-100 font-sans min-h-screen flex items-center justify-center">
+
+  <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
+    <h1 class="text-3xl font-bold mb-6 text-blue-600 text-center">🚀 Flask Chat App</h1>
+
+    <form method="post" action="/" class="space-y-4">
+      <div>
+        <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+        <input type="text" name="username" id="username" required
+               class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200">
+      </div>
+
+      <div>
+        <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+        <textarea name="message" id="message" rows="3" required
+                  class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200"></textarea>
+      </div>
+
+      <button type="submit"
+              class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-200">
+        💬 Send Message
+      </button>
+    </form>
+
+    {% if messages %}
+    <div class="mt-8">
+      <h2 class="text-xl font-semibold mb-4 text-gray-800">📜 Previous Messages</h2>
+      <ul class="space-y-2 max-h-48 overflow-y-auto">
+        {% for msg in messages %}
+        <li class="bg-gray-100 p-3 rounded-md shadow-sm">
+          <strong class="text-blue-500">{{ msg.username }}</strong>: {{ msg.message }}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </div>
+
 </body>
 </html>
